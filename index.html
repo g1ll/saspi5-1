@@ -13,8 +13,8 @@
     </style>
 </head>
 <body ng-app ng-init="weekdays=['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']">
-	
-	<div ng-controller="personController">
+	<div ng-controller="cartController">
+		<div>
 		<form action="javascript:;" class="half">
 			<fieldset>
 				<label>
@@ -44,7 +44,7 @@
 
 		<div class="half">
 			<p>{{ weekdays[weekDay()] }}</p>
-			<p ng-bind="'Carrinho de ' + theName + ' ' + surname"></p>
+			<p ng-bind="'Carrinho de ' + theName + ' ' + surname | uppercase"></p>
 			<div>
 				<input type="search" placeholder="Encontrar produto" ng-model="search">
 			</div>
@@ -64,5 +64,6 @@
 			</table>	
 		</div>
 	</div>
+	
 </body>
 </html>

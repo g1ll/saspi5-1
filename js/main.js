@@ -1,13 +1,9 @@
-function personController($scope) {
-	$scope.personName = 'Mateus';
+function cartController($scope) {
 	$scope.cart = [{
 		name: 'Arroz',
 		quantity: 2,
 		price: 2.38
 	}];
-	$scope.changeName = function() {
-		return Date.now();
-	};
 	$scope.weekDay = function() {
 		return new Date().getDay();
 	};
