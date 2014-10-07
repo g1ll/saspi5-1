@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+	<script src="js/main.js"></script>
+    <style>
+        form { float:left;}
+        .half {width:45%; display:inline-block; padding:0;}
+        table {border-collapse:collapse;}
+        table td { width:80px;}
+    </style>
+</head>
+<body ng-app ng-init="weekdays=['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']">
+	
+	<div ng-controller="personController">
+		<form action="javascript:;" class="half">
+			<fieldset>
+				<label>
+					<p>Nome</p>
+					<input type="text" ng-model="theName" ng-init="theName='Mateus'" autofocus required>
+				</label>
+				<label>
+					<p>Sobrenome</p>
+					<input type="text" ng-model="surname">
+				</label>
+				<label>
+					<p>Produto</p>
+					<input type="text" ng-model="productName">
+				</label>
+				<label>
+					<p>Quantidade</p>
+					<input type="number" ng-model="quantity">
+				</label>
+				<label>
+					<p>Valor</p>
+					<input type="text" ng-model="price">
+				</label>
+
+				<button type="button" ng-click="addProduct(productName, quantity, price)">Adicionar</button>
+			</fieldset>
+		</form>
+
+		<div class="half">
+			<p>{{ weekdays[weekDay()] }}</p>
+			<p ng-bind="'Carrinho de ' + theName + ' ' + surname"></p>
+			<div>
+				<input type="search" placeholder="Encontrar produto" ng-model="search">
+			</div>
+			<table border cellspacing="0" class="half">
+				<thead>
+					<th>Descrição</th>
+					<th>Quantidade</th>
+					<th>Valor unitário</th>
+					<th>Valor total</th>
+				</thead>
+				<tr ng-repeat="product in cart | filter: search">
+					<td>{{ product.name }}</td>
+					<td>{{ product.quantity }}</td>
+					<td>{{ product.price | currency }}</td>
+					<td>{{ product.price * product.quantity | currency }}</td>
+				</tr>
+			</table>	
+		</div>
+	</div>
+</body>
+</html>
