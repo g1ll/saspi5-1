@@ -6,14 +6,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
 	<script src="js/main.js"></script>
     <style>
-        form { float:left;}
+        form {float:left;}
         .half {width:45%; display:inline-block; padding:0;}
-        table {border-collapse:collapse;}
-        table td { width:80px;}
+        table {width:400px; border-collapse:collapse;}
+        table td {width:100px; background:#cacaca;}
     </style>
 </head>
 <body ng-app ng-init="weekdays=['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']">
-	<div ng-controller="cartController">
+	<div ng-controller="CartCtrl">
 		<div>
 		<form action="javascript:;" class="half">
 			<fieldset>
@@ -46,6 +46,18 @@
 			<p>{{ weekdays[weekDay()] }}</p>
 			<p ng-bind="'Carrinho de ' + theName + ' ' + surname | uppercase"></p>
 			<div>
+				<p>Ordenar</p>
+				<label>
+					<input type="radio" ng-model="theFilter" name="theFilter" value="name"> Descrição
+				</label>
+				<label>
+					<input type="radio" ng-model="theFilter" name="theFilter" value="quantity"> Quantidade
+				</label>
+				<label>
+					<input type="radio" ng-model="theFilter" name="theFilter" value="price"> Preço
+				</label>
+			</div>
+			<div>
 				<input type="search" placeholder="Encontrar produto" ng-model="search">
 			</div>
 			<table border cellspacing="0" class="half">
@@ -55,7 +67,7 @@
 					<th>Valor unitário</th>
 					<th>Valor total</th>
 				</thead>
-				<tr ng-repeat="product in cart | filter: search">
+				<tr ng-repeat="product in cart | filter: search | orderBy: theFilter">
 					<td>{{ product.name }}</td>
 					<td>{{ product.quantity }}</td>
 					<td>{{ product.price | currency }}</td>
